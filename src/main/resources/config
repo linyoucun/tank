@@ -1,5 +1,5 @@
 #tank count as initialization
-initTankCount=1000
+initTankCount=20
 tankSpeed=15
 bulletSpeed=50
 gameWidth=1080
