@@ -79,8 +79,8 @@ public class TankFrame extends Frame {
             explodes.get(i).paint(g);
         }
 
-        for(int i=0;i<bullets.size();i++){
-            for(int j=0;j<tanks.size();j++){
+        for (int i = 0; i < bullets.size(); i++) {
+            for (int j = 0; j < tanks.size(); j++) {
                 bullets.get(i).collideWith(tanks.get(j));
             }
         }
@@ -132,9 +132,7 @@ public class TankFrame extends Frame {
                     bD = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    for (int i = 0; i < 2; i++) {
-                        myTank.fire();
-                    }
+                    myTank.fire();
                     break;
                 default:
                     break;
