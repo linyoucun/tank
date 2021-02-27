@@ -1,6 +1,7 @@
 package com.lyc.tank;
 
 import com.lyc.tank.abstractfactory.BaseBullet;
+import com.lyc.tank.abstractfactory.BaseTank;
 
 import java.awt.*;
 
@@ -96,7 +97,7 @@ public class Bullet extends BaseBullet {
         this.living = false;
     }
 
-    public void collideWith(Tank tank) {
+    public void collideWith(BaseTank tank) {
         if (this.group == tank.getGroup()) return;
 
         if (rect.intersects(tank.rect)) {

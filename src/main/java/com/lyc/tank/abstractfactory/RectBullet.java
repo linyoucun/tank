@@ -90,7 +90,7 @@ public class RectBullet extends BaseBullet {
         this.living = false;
     }
 
-    public void collideWith(Tank tank) {
+    public void collideWith(BaseTank tank) {
         if (this.group == tank.getGroup()) return;
 
         if (rect.intersects(tank.rect)) {
