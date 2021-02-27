@@ -1,9 +1,11 @@
 package com.lyc.tank;
 
+import com.lyc.tank.abstractfactory.BaseTank;
+
 import java.awt.*;
 import java.util.Random;
 
-public class Tank {
+public class Tank extends BaseTank {
     int x, y;
     Dir dir = Dir.DOWN;
     private static final int SPEED = PropertyMgr.getInt("tankSpeed");
@@ -11,7 +13,7 @@ public class Tank {
     public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     private Random random = new Random();
 
