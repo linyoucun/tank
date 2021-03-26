@@ -1,4 +1,9 @@
-package com.lyc.tank;
+package com.lyc.tank.strategy;
+
+import com.lyc.tank.Audio;
+import com.lyc.tank.Bullet;
+import com.lyc.tank.Group;
+import com.lyc.tank.Tank;
 
 public class DefaultFireStrategy implements FireStrategy {
 

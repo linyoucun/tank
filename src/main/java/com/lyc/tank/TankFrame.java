@@ -1,12 +1,12 @@
 package com.lyc.tank;
 
+import com.lyc.tank.strategy.FourDirFireStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TankFrame extends Frame {
 

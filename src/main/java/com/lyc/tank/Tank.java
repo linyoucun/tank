@@ -1,13 +1,16 @@
 package com.lyc.tank;
 
+import com.lyc.tank.strategy.DefaultFireStrategy;
+import com.lyc.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
-public class Tank {
-    int x, y;
-    Dir dir = Dir.DOWN;
+public class Tank extends GameObject {
+    public int orgX, orgY;
+    public int x, y;
+    public Dir dir = Dir.DOWN;
     private static final int SPEED = PropertyMgr.getInt("tankSpeed");
-
     public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
@@ -17,8 +20,28 @@ public class Tank {
 
     private boolean isMoving = true;
     private boolean living = true;
-    Group group = Group.BAD;
-    GameModel gm;
+    public Group group = Group.BAD;
+    public GameModel gm;
+
+    public void stop(){
+        isMoving = false;
+    }
+
+    public int getOrgX() {
+        return orgX;
+    }
+
+    public void setOrgX(int orgX) {
+        this.orgX = orgX;
+    }
+
+    public int getOrgY() {
+        return orgY;
+    }
+
+    public void setOrgY(int orgY) {
+        this.orgY = orgY;
+    }
 
     public int getX() {
         return x;
@@ -73,9 +96,13 @@ public class Tank {
         rect.height = HEIGHT;
     }
 
+    public Rectangle getRect() {
+        return rect;
+    }
+
     public void paint(Graphics g) {
         if (!living) {
-            gm.tanks.remove(this);
+            gm.remove(this);
             return;
         }
 
@@ -100,9 +127,13 @@ public class Tank {
     }
 
     private void move() {
+        this.orgX = this.x;
+        this.orgY = this.y;
+
         if (!isMoving) {
             return;
         }
+
         switch (dir) {
             case LEFT:
                 x -= SPEED;
@@ -134,6 +165,11 @@ public class Tank {
         // update rect
         rect.x = this.x;
         rect.y = this.y;
+    }
+
+    public void backOrg(){
+        this.x = orgX;
+        this.y = orgY;
     }
 
     private void boundsCheck() {
