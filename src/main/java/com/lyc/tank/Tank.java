@@ -192,7 +192,9 @@ public class Tank extends GameObject {
     }
 
     public void fire(FireStrategy fireStrategy) {
-        fireStrategy.fire(this);
+        if(this.living){
+            fireStrategy.fire(this);
+        }
     }
 
     public void die() {

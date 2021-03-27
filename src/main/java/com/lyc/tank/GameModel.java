@@ -2,6 +2,7 @@ package com.lyc.tank;
 
 import com.lyc.tank.cor.BulletTankCollider;
 import com.lyc.tank.cor.Collider;
+import com.lyc.tank.cor.ColliderChain;
 import com.lyc.tank.cor.TankTankCollider;
 
 import java.awt.*;
@@ -12,8 +13,7 @@ public class GameModel {
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
     private List<GameObject> objects = new ArrayList<>();
 
-    Collider collider = new BulletTankCollider();
-    Collider collider2 = new TankTankCollider();
+    ColliderChain chain = new ColliderChain();
 
     public GameModel() {
         int initTankCount = PropertyMgr.getInt("initTankCount");
@@ -48,16 +48,14 @@ public class GameModel {
         // 互相碰撞
         for (int i = 0; i < objects.size(); i++) {
             GameObject o1 = objects.get(i);
-            collider.collide(o1, myTank);
-            collider2.collide(o1, myTank);
+            chain.collide(o1, myTank);
         }
 
         for (int i = 0; i < objects.size(); i++) {
             for (int j = i + 1; j < objects.size(); j++) {
                 GameObject o1 = objects.get(i);
                 GameObject o2 = objects.get(j);
-                collider.collide(o1, o2);
-                collider2.collide(o1, o2);
+                chain.collide(o1, o2);
             }
         }
 
