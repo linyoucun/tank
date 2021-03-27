@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameModel {
-    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
+    Tank myTank = new Tank(600, 600, Dir.DOWN, Group.GOOD, this);
     private List<GameObject> objects = new ArrayList<>();
 
     ColliderChain chain = new ColliderChain();
@@ -20,8 +20,13 @@ public class GameModel {
 
         // 初始化地方坦克
         for (int i = 0; i < initTankCount; i++) {
-            objects.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
+            objects.add(new Tank(i * 80, 0, Dir.DOWN, Group.BAD, this));
         }
+
+        // initialize wall
+        add(new Wall(100, 100, 200, 400));
+        add(new Wall(450, 100, 200, 400));
+        add(new Wall(800, 100, 200, 400));
     }
 
     public void add(GameObject go) {

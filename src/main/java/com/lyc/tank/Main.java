@@ -1,6 +1,6 @@
 package com.lyc.tank;
 
-public class T {
+public class Main {
     public static void main(String[] args) throws InterruptedException {
         TankFrame tf = new TankFrame();
 

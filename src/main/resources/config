@@ -1,9 +1,9 @@
 #tank count as initialization
-initTankCount=20
+initTankCount=12
 tankSpeed=15
 bulletSpeed=50
 gameWidth=1080
 gameHeight=720
 
 #colliders
-colliders=com.lyc.tank.cor.BulletTankCollider,com.lyc.tank.cor.TankTankCollider
+colliders=com.lyc.tank.cor.BulletTankCollider,com.lyc.tank.cor.TankTankCollider,com.lyc.tank.cor.BulletWallCollider,com.lyc.tank.cor.TankWallCollider
