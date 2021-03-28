@@ -1,9 +1,7 @@
 package com.lyc.tank.cor;
 
 import com.lyc.tank.Bullet;
-import com.lyc.tank.Explode;
 import com.lyc.tank.GameObject;
-import com.lyc.tank.Tank;
 import com.lyc.tank.Wall;
 
 public class BulletWallCollider implements Collider {
@@ -14,7 +12,8 @@ public class BulletWallCollider implements Collider {
             Bullet b = (Bullet) o1;
             Wall w = (Wall) o2;
 
-            if (b.rect.intersects(w.rect)) {
+            if (b.getRect().intersects(w.rect)) {
+                System.out.println("bullet wall inser");
                 b.die();
             }
         } else if (o1 instanceof Wall && o2 instanceof Bullet) {

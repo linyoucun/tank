@@ -14,7 +14,7 @@ public class Tank extends GameObject {
     public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
-    public Rectangle rect = new Rectangle();
+    private Rectangle rect;
 
     private Random random = new Random();
 
@@ -22,7 +22,7 @@ public class Tank extends GameObject {
     private boolean living = true;
     public Group group = Group.BAD;
 
-    public void stop(){
+    public void stop() {
         isMoving = false;
     }
 
@@ -88,6 +88,7 @@ public class Tank extends GameObject {
         this.dir = dir;
         this.group = group;
 
+        rect = new Rectangle();
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
@@ -166,7 +167,7 @@ public class Tank extends GameObject {
         rect.y = this.y;
     }
 
-    public void backOrg(){
+    public void backOrg() {
         this.x = orgX;
         this.y = orgY;
     }
@@ -191,7 +192,7 @@ public class Tank extends GameObject {
     }
 
     public void fire(FireStrategy fireStrategy) {
-        if(this.living){
+        if (this.living) {
             fireStrategy.fire(this);
         }
     }

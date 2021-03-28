@@ -7,7 +7,7 @@ public class Bullet extends GameObject {
     public static final int WIDTH = ResourceMgr.bulletD.getWidth();
     public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
 
-    public Rectangle rect = new Rectangle();
+    private Rectangle rect;
 
     private int x, y;
     private Dir dir;
@@ -21,6 +21,7 @@ public class Bullet extends GameObject {
         this.dir = dir;
         this.group = group;
 
+        rect = new Rectangle();
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
@@ -85,4 +86,11 @@ public class Bullet extends GameObject {
         GameModel.getInstance().remove(this);
     }
 
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public void setRect(Rectangle rect) {
+        this.rect = rect;
+    }
 }
