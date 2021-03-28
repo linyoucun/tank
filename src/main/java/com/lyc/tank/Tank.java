@@ -21,7 +21,6 @@ public class Tank extends GameObject {
     private boolean isMoving = true;
     private boolean living = true;
     public Group group = Group.BAD;
-    public GameModel gm;
 
     public void stop(){
         isMoving = false;
@@ -83,17 +82,18 @@ public class Tank extends GameObject {
         this.group = group;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        GameModel.getInstance().add(this);
     }
 
     public Rectangle getRect() {
@@ -102,7 +102,6 @@ public class Tank extends GameObject {
 
     public void paint(Graphics g) {
         if (!living) {
-            gm.remove(this);
             return;
         }
 
@@ -199,5 +198,6 @@ public class Tank extends GameObject {
 
     public void die() {
         this.living = false;
+        GameModel.getInstance().remove(this);
     }
 }

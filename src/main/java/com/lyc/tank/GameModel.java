@@ -1,26 +1,39 @@
 package com.lyc.tank;
 
-import com.lyc.tank.cor.BulletTankCollider;
-import com.lyc.tank.cor.Collider;
 import com.lyc.tank.cor.ColliderChain;
-import com.lyc.tank.cor.TankTankCollider;
+import com.lyc.tank.strategy.FourDirFireStrategy;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameModel {
-    Tank myTank = new Tank(600, 600, Dir.DOWN, Group.GOOD, this);
-    private List<GameObject> objects = new ArrayList<>();
+    private static final GameModel INSTANCE = new GameModel();
 
-    ColliderChain chain = new ColliderChain();
+    static {
+        INSTANCE.init();
+    }
 
-    public GameModel() {
-        int initTankCount = PropertyMgr.getInt("initTankCount");
+    private Tank myTank;
+    private final List<GameObject> objects = new ArrayList<>();
+    private final ColliderChain chain = new ColliderChain();
+
+    public static GameModel getInstance() {
+        return INSTANCE;
+    }
+
+    private GameModel() {
+
+    }
+
+    private void init() {
+        // 初始化主战坦克
+        myTank = new Tank(600, 600, Dir.DOWN, Group.GOOD);
 
         // 初始化地方坦克
+        int initTankCount = PropertyMgr.getInt("initTankCount");
         for (int i = 0; i < initTankCount; i++) {
-            objects.add(new Tank(i * 80, 0, Dir.DOWN, Group.BAD, this));
+            objects.add(new Tank(i * 80, 0, Dir.DOWN, Group.BAD));
         }
 
         // initialize wall
@@ -34,6 +47,10 @@ public class GameModel {
     }
 
     public void remove(GameObject go) {
+        if (go == myTank) {
+            myTank = null;
+            return;
+        }
         this.objects.remove(go);
     }
 
@@ -45,7 +62,22 @@ public class GameModel {
 //        g.drawString("爆炸的数量：" + explodes.size(), 10, 100);
         g.setColor(c);
 
+        // 如果myTank已经被杀死后，打印出游戏结束
+        if (myTank == null) {
+            Color c2 = g.getColor();
+            Font f = g.getFont();
+
+            g.setColor(Color.RED);
+            g.setFont(new Font("feifeiFont", 0, 100));
+            g.drawString("GAME OVER", 260, 400);
+
+            g.setColor(c2);
+            g.setFont(f);
+            return;
+        }
+
         myTank.paint(g);
+
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).paint(g);
         }
@@ -69,6 +101,13 @@ public class GameModel {
 //                bullets.get(i).collideWith(tanks.get(j));
 //            }
 //        }
+    }
+
+    public void mainTankFire(){
+        if(myTank == null){
+            return;
+        }
+        myTank.fire(FourDirFireStrategy.getInstance());
     }
 
     public Tank getMainTank() {
